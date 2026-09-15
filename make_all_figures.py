@@ -157,16 +157,18 @@ def fig2(clin, ang, outdir):
              & ang.cohort.isin(['TC38', 'new37'])].copy()
     ca['yaw_dev'] = ca.theta_star_rel_orig_deg.apply(minimum_yaw)
 
-    # merge EF data from clinical table
-    ef_lookup = {}
+    # merge EF data from clinical table (correct per-target lookup)
+    ef_orig_map, ef_opt_map = {}, {}
     for _, r in clin.iterrows():
-        ef_lookup[r['subject']] = r
-    ca['ef_orig'] = ca.subject.map(
-        lambda s: ef_lookup[s][f"{ca[ca.subject==s].target.iloc[0]}"
-                               "_EF_Ori_FEM"])
-    ca['ef_opt'] = ca.subject.map(
-        lambda s: ef_lookup[s][f"{ca[ca.subject==s].target.iloc[0]}"
-                               "_EF_Opt_FEM"])
+        s = r['subject']
+        ef_orig_map[(s, 'M1')] = r['M1_EF_Ori_FEM']
+        ef_orig_map[(s, 'DLPFC')] = r['DLPFC_EF_Ori_FEM']
+        ef_opt_map[(s, 'M1')] = r['M1_EF_Opt_FEM']
+        ef_opt_map[(s, 'DLPFC')] = r['DLPFC_EF_Opt_FEM']
+    ca['ef_orig'] = [ef_orig_map.get((r.subject, r.target), np.nan)
+                     for _, r in ca.iterrows()]
+    ca['ef_opt'] = [ef_opt_map.get((r.subject, r.target), np.nan)
+                    for _, r in ca.iterrows()]
     ca['below95'] = (ca.ef_orig < 0.95 * ca.ef_opt).astype(int)
 
     fig, axes = plt.subplots(1, 2, figsize=(10.8, 4.8))
