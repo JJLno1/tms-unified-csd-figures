@@ -234,8 +234,8 @@ def fig3(wide, outdir):
     order = ['Asian', 'White', 'Black']
     ax = axes[0]
     targets = ['M1', 'DLPFC', 'C3', 'F3']
-    p_text = {'M1': '$p$ = 0.010', 'DLPFC': '$p$ < 0.001',
-              'C3': '$p$ < 0.001', 'F3': '$p$ < 0.001'}
+    p_text = {'M1': '$p$ = 0.012', 'DLPFC': '$p$ < 0.001',
+              'C3': '$p$ = 0.002', 'F3': '$p$ = 0.002'}
     centers = np.array([1, 3, 5, 7], float)
     offsets = np.array([-0.28, 0, 0.28])
     # Uniform p-value height across all targets (above global max)
