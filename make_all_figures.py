@@ -256,8 +256,9 @@ def fig3(wide, outdir):
                       markerfacecolor=COHORT_COLORS[c],
                       markeredgecolor='none', markersize=5, label=c)
                for c in order]
-    ax.legend(handles=handles, title='Cohort', frameon=False, loc='lower right',
-              fontsize=7, title_fontsize=7)
+    ax.legend(handles=handles, frameon=False, loc='upper center',
+              bbox_to_anchor=(0.5, -0.15), ncol=3, fontsize=7,
+              columnspacing=1.2, handletextpad=0.4)
 
     ax = axes[1]
     ratio_max = max(wide['ratio_M1_DLPFC'].max(), wide['ratio_C3_F3'].max())
@@ -275,7 +276,9 @@ def fig3(wide, outdir):
     ax.set_xticks([1.0, 4.0]); ax.set_xticklabels(['M1/DLPFC', 'C3/F3'])
     ax.set_ylabel('Within-subject EF$_{99.9}$ ratio')
     ax.set_title('B. Internal EF ratios')
-    ax.legend(handles=handles, title='Cohort', frameon=False, loc='lower center')
+    ax.legend(handles=handles, frameon=False, loc='upper center',
+              bbox_to_anchor=(0.5, -0.15), ncol=3, fontsize=7,
+              columnspacing=1.2, handletextpad=0.4)
     save_both(fig, outdir, 'Figure_3')
 
 
