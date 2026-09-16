@@ -234,8 +234,8 @@ def fig3(wide, outdir):
     order = ['Asian', 'White', 'Black']
     ax = axes[0]
     targets = ['M1', 'DLPFC', 'C3', 'F3']
-    p_text = {'M1': 'p = 0.010', 'DLPFC': 'p < 0.001',
-              'C3': 'p < 0.001', 'F3': 'p < 0.001'}
+    p_text = {'M1': '$p$ = 0.010', 'DLPFC': '$p$ < 0.001',
+              'C3': '$p$ < 0.001', 'F3': '$p$ < 0.001'}
     centers = np.array([1, 3, 5, 7], float)
     offsets = np.array([-0.28, 0, 0.28])
     for ti, t in enumerate(targets):
@@ -258,8 +258,8 @@ def fig3(wide, outdir):
 
     ax = axes[1]
     for ri, (label, col, center, pv) in enumerate([
-            ('M1/DLPFC', 'ratio_M1_DLPFC', 1.0, 'p = 0.211'),
-            ('C3/F3', 'ratio_C3_F3', 4.0, 'p = 0.889')]):
+            ('M1/DLPFC', 'ratio_M1_DLPFC', 1.0, '$p$ = 0.211'),
+            ('C3/F3', 'ratio_C3_F3', 4.0, '$p$ = 0.889')]):
         for ci, c in enumerate(order):
             vals = wide.loc[wide.cohort_label == c, col].dropna()
             draw_box(ax, vals, center + offsets[ci],
@@ -288,7 +288,7 @@ def fig4(wide, outdir):
         xs = np.linspace(x.min() - 0.3, x.max() + 0.3, 200)
         pred = model.get_prediction(sm.add_constant(xs)).summary_frame(0.05)
         ax.plot(xs, pred['mean'].values, color=color,
-                label=f'{label}: R²={model.rsquared:.3f}')
+                label=f'{label}: $R^2$={model.rsquared:.3f}')
         ax.fill_between(xs, pred['obs_ci_lower'], pred['obs_ci_upper'],
                         color=color, alpha=0.12)
     ax.axhline(1.0, color='tab:blue', ls='--', lw=1.0)
