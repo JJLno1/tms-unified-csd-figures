@@ -248,7 +248,7 @@ def fig3(wide, outdir):
                 p_text[t], ha='center', va='bottom', fontsize=8)
     ax.set_xlim(0.3, 7.7); ax.set_ylim(105, 300)
     ax.set_xticks(centers); ax.set_xticklabels(targets)
-    ax.set_ylabel('Optimised EF99.9 (V/m)')
+    ax.set_ylabel('Optimised EF$_{99.9}$ (V/m)')
     ax.set_title('A. Absolute EF under uniform 75 A/µs')
     handles = [Line2D([0], [0], marker='o', linestyle='None',
                       markerfacecolor=COHORT_COLORS[c],
@@ -269,7 +269,7 @@ def fig3(wide, outdir):
     ax.axhline(1.0, color='tab:blue', ls='--', lw=1.0)
     ax.set_xlim(0.3, 4.7); ax.set_ylim(0.65, 1.55)
     ax.set_xticks([1.0, 4.0]); ax.set_xticklabels(['M1/DLPFC', 'C3/F3'])
-    ax.set_ylabel('Within-subject EF99.9 ratio')
+    ax.set_ylabel('Within-subject EF$_{99.9}$ ratio')
     ax.set_title('B. Internal EF ratios')
     ax.legend(handles=handles, title='Cohort', frameon=False, loc='lower center')
     save_both(fig, outdir, 'Figure_3')
@@ -293,7 +293,7 @@ def fig4(wide, outdir):
                         color=color, alpha=0.12)
     ax.axhline(1.0, color='tab:blue', ls='--', lw=1.0)
     ax.axvline(0.0, color='tab:blue', ls=':', lw=1.0)
-    ax.set_xlabel('ΔSCD (mm)'); ax.set_ylabel('EF99.9 ratio')
+    ax.set_xlabel('ΔSCD (mm)'); ax.set_ylabel('EF$_{99.9}$ ratio')
     ax.legend(frameon=False, loc='upper right')
     save_both(fig, outdir, 'Figure_4')
 
