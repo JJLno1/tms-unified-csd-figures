@@ -256,7 +256,8 @@ def fig3(wide, outdir):
                       markerfacecolor=COHORT_COLORS[c],
                       markeredgecolor='none', markersize=5, label=c)
                for c in order]
-    ax.legend(handles=handles, title='Cohort', frameon=False, loc='upper right')
+    ax.legend(handles=handles, title='Cohort', frameon=False, loc='lower right',
+              fontsize=7, title_fontsize=7)
 
     ax = axes[1]
     ratio_max = max(wide['ratio_M1_DLPFC'].max(), wide['ratio_C3_F3'].max())
