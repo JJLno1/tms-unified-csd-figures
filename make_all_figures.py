@@ -140,7 +140,7 @@ def fig1(clin, outdir):
     ax.set_ylabel('Mean EF (V/m)'); ax.set_ylim(100, 190)
     ax.set_title('B. Target × algorithm interaction')
     ax.legend(frameon=False, loc='upper left')
-    ax.text(0.5, 188, 'Interaction β = −22.34 V/m; p < 0.001',
+    ax.text(0.5, 188, 'Interaction β = −22.34 V/m; $p$ < 0.001',
             ha='center', va='top', fontsize=8)
     save_both(fig, outdir, 'Figure_1')
 
