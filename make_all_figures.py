@@ -238,15 +238,17 @@ def fig3(wide, outdir):
               'C3': '$p$ < 0.001', 'F3': '$p$ < 0.001'}
     centers = np.array([1, 3, 5, 7], float)
     offsets = np.array([-0.28, 0, 0.28])
+    # Uniform p-value height across all targets (above global max)
+    global_max = max(wide[f'ef99p9_opt_{t}'].max() for t in targets)
+    p_y = global_max + 15
     for ti, t in enumerate(targets):
         for ci, c in enumerate(order):
             vals = wide.loc[wide.cohort_label == c,
                             f'ef99p9_opt_{t}'].dropna()
             draw_box(ax, vals, centers[ti] + offsets[ci],
                      COHORT_COLORS[c], width=0.45, seed=1000 + ti * 10 + ci)
-        ax.text(centers[ti], wide[f'ef99p9_opt_{t}'].max() + 18,
-                p_text[t], ha='center', va='bottom', fontsize=8)
-    ax.set_xlim(0.3, 7.7); ax.set_ylim(105, 300)
+        ax.text(centers[ti], p_y, p_text[t], ha='center', va='bottom', fontsize=8)
+    ax.set_xlim(0.3, 7.7); ax.set_ylim(105, p_y + 18)
     ax.set_xticks(centers); ax.set_xticklabels(targets)
     ax.set_ylabel('Optimised EF$_{99.9}$ (V/m)')
     ax.set_title('A. Absolute EF under uniform 75 A/µs')
@@ -257,6 +259,8 @@ def fig3(wide, outdir):
     ax.legend(handles=handles, title='Cohort', frameon=False, loc='upper right')
 
     ax = axes[1]
+    ratio_max = max(wide['ratio_M1_DLPFC'].max(), wide['ratio_C3_F3'].max())
+    p_y_ratio = ratio_max + 0.04
     for ri, (label, col, center, pv) in enumerate([
             ('M1/DLPFC', 'ratio_M1_DLPFC', 1.0, '$p$ = 0.211'),
             ('C3/F3', 'ratio_C3_F3', 4.0, '$p$ = 0.889')]):
@@ -264,10 +268,9 @@ def fig3(wide, outdir):
             vals = wide.loc[wide.cohort_label == c, col].dropna()
             draw_box(ax, vals, center + offsets[ci],
                      COHORT_COLORS[c], width=0.45, seed=2000 + ri * 10 + ci)
-        ax.text(center, wide[col].max() + (0.03 if ri == 0 else 0.05),
-                pv, ha='center', va='bottom', fontsize=8)
+        ax.text(center, p_y_ratio, pv, ha='center', va='bottom', fontsize=8)
     ax.axhline(1.0, color='tab:blue', ls='--', lw=1.0)
-    ax.set_xlim(0.3, 4.7); ax.set_ylim(0.65, 1.55)
+    ax.set_xlim(0.3, 4.7); ax.set_ylim(0.65, p_y_ratio + 0.06)
     ax.set_xticks([1.0, 4.0]); ax.set_xticklabels(['M1/DLPFC', 'C3/F3'])
     ax.set_ylabel('Within-subject EF$_{99.9}$ ratio')
     ax.set_title('B. Internal EF ratios')
