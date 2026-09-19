@@ -116,7 +116,7 @@ def fig1(clin, outdir):
     ax.set_xlim(0.3, 5.7); ax.set_ylim(60, 340)
     ax.set_xticks([1, 2, 4, 5]); ax.set_xticklabels(['MSM', 'FEM'] * 2)
     ax.set_ylabel('Electric field (V/m)')
-    ax.set_title('A. MSM vs FEM at the original orientation')
+    ax.set_title('A. MSM vs FEM at the reconstructed clinical FEM orientation')
     ax.text(1.5, 296, '***', ha='center', va='center', fontsize=14)
     ax.text(4.5, 326, '***', ha='center', va='center', fontsize=14)
     ax.text(1.5, -0.075, 'M1', transform=ax.get_xaxis_transform(),
@@ -275,7 +275,7 @@ def fig3(wide, outdir):
     ax.set_xlim(0.3, 4.7); ax.set_ylim(0.65, p_y_ratio + 0.06)
     ax.set_xticks([1.0, 4.0]); ax.set_xticklabels(['M1/DLPFC', 'C3/F3'])
     ax.set_ylabel('Within-subject EF$_{99.9}$ ratio')
-    ax.set_title('B. Internal EF ratios')
+    ax.set_title('B. Within-subject EF$_{99.9}$ ratios')
     ax.legend(handles=handles, frameon=False, loc='upper center',
               bbox_to_anchor=(0.5, -0.15), ncol=3, fontsize=7,
               columnspacing=1.2, handletextpad=0.4)
